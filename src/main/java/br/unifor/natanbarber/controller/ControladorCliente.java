@@ -12,12 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.unifor.natanbarber.model.Cliente;
+import br.unifor.natanbarber.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
 public class ControladorCliente {
 
+    private ClienteService service;
+
     private static ArrayList<Cliente> clientes = new ArrayList<>();
+
+    public ControladorCliente(ClienteService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public List<Cliente> listarClientes() {
