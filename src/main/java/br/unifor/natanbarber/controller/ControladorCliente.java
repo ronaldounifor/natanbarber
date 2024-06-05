@@ -1,6 +1,5 @@
 package br.unifor.natanbarber.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,35 +19,28 @@ public class ControladorCliente {
 
     private ClienteService service;
 
-    private static ArrayList<Cliente> clientes = new ArrayList<>();
-
     public ControladorCliente(ClienteService service) {
         this.service = service;
     }
 
     @GetMapping
     public List<Cliente> listarClientes() {
-        return clientes;
+        return service.listarClientes();
     }
 
     @GetMapping("/{cpf}")
     public Cliente pegarDetalhesCliente(@PathVariable String cpf) {
-        Cliente clienteDesejado = null;
-        for (Cliente cliente : clientes)
-            if(cpf.equals(cliente.getCpf())) { clienteDesejado = cliente; break; }
-
-        return clienteDesejado;
+        return service.pegarDetalhesCliente(cpf);
     }
 
     @PostMapping
     public void adicionarCliente(@RequestBody Cliente cliente) {
-        clientes.add(cliente);
+        service.adicionarCliente(cliente);
     }
 
     @DeleteMapping("/{cpf}")
     public void removerCliente(@PathVariable String cpf) {
-        Cliente clienteRemovido = pegarDetalhesCliente(cpf);
-        clientes.remove(clienteRemovido);
+        service.removerCliente(cpf);
     }
     
 }

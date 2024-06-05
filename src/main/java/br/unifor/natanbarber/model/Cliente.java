@@ -1,11 +1,13 @@
 package br.unifor.natanbarber.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class Cliente {
-    private String nome;
+    @Id
     private String cpf;
+    private String nome;
     private String endereco;
     private String telefone;
     private String email;
